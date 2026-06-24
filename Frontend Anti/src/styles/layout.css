@@ -1,0 +1,526 @@
+/* ── App Shell ───────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  /* Premium Textured Background: Subtle radial gradient for depth */
+  background-color: var(--color-bg-app);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(51, 119, 255, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(51, 119, 255, 0.02) 0px, transparent 50%);
+}
+
+/* ── Sidebar (Light, Bright Theme) ───────────────────────── */
+.sidebar {
+  width: 260px;
+  background-color: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.sidebar.minimized {
+  width: 72px;
+}
+
+.sidebar-header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.sidebar.minimized .sidebar-header {
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 0;
+  gap: 8px;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  text-decoration: none;
+  min-width: 0;
+}
+
+.sidebar-brand__icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: var(--color-brand-600);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(51, 119, 255, 0.25);
+}
+
+.sidebar-brand__icon.finance {
+  background: var(--color-purple);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+
+.sidebar-brand__text {
+  white-space: nowrap;
+}
+
+.sidebar-brand__name {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.3px;
+  color: var(--color-text-1);
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--color-text-3);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.sidebar-toggle:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-1);
+}
+
+.sidebar-nav {
+  padding: var(--spacing-4) var(--spacing-3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-nav__section {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: var(--spacing-4) 0 var(--spacing-2) var(--spacing-2);
+  white-space: nowrap;
+}
+
+.sidebar-nav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-2);
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.minimized .sidebar-nav__item {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.sidebar-nav__item:hover {
+  background-color: var(--color-brand-50);
+  color: var(--color-brand-600);
+}
+
+.sidebar-nav__item.active {
+  background-color: var(--color-brand-100);
+  color: var(--color-brand-700);
+  font-weight: 600;
+}
+
+.sidebar-nav__item.active.finance {
+  background-color: var(--color-purple-bg);
+  color: var(--color-purple);
+}
+
+.sidebar-nav__item svg {
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--color-border-light);
+  white-space: nowrap;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.sidebar-user__avatar {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid var(--color-border);
+}
+
+.sidebar-user__avatar.finance {
+  background: var(--color-purple-bg);
+  color: var(--color-purple);
+}
+
+.sidebar-user__info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar-user__name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-text-1);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sidebar-user__meta {
+  font-size: 12px;
+  color: var(--color-text-3);
+}
+
+/* ── Main Content ────────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: padding 0.3s;
+}
+
+/* ── Topbar (Clean & Bright) ─────────────────────────────── */
+.topbar {
+  height: 72px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-8);
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.topbar-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-text-1);
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.breadcrumb-link {
+  color: var(--color-text-3);
+  transition: color 0.2s;
+}
+
+.breadcrumb-link:hover {
+  color: var(--color-brand-600);
+}
+
+.breadcrumb-separator {
+  color: var(--color-text-3);
+  opacity: 0.5;
+}
+
+.breadcrumb-current {
+  font-weight: 500;
+  color: var(--color-text-1);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* ── Profile Dropdown ────────────────────────────────────── */
+.profile-menu {
+  position: relative;
+}
+
+.profile-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 6px 12px 6px 6px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--color-surface);
+}
+
+.profile-btn:hover {
+  border-color: var(--color-brand-400);
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.profile-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-1);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-dropdown);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-2);
+  z-index: 100;
+  animation: slideDown 0.15s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header {
+  padding: var(--spacing-3);
+}
+
+.dropdown-name {
+  font-weight: 600;
+  color: var(--color-text-1);
+  font-size: 14px;
+}
+
+.dropdown-email {
+  font-size: 12px;
+  color: var(--color-text-3);
+  margin-top: 2px;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--color-border-light);
+  margin: 4px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-1);
+}
+
+.dropdown-item.danger {
+  color: var(--color-error);
+}
+
+.dropdown-item.danger:hover {
+  background: var(--color-error-bg);
+}
+
+/* ── Page Content ────────────────────────────────────────── */
+.page-content {
+  padding: var(--spacing-8);
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-6);
+}
+
+.page-header__title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--color-text-1);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.page-header__sub {
+  color: var(--color-text-3);
+  font-size: 15px;
+}
+
+/* ── Form Page Specifics ─────────────────────────────────── */
+.form-page .page-content {
+  max-width: 800px;
+}
+
+.form-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-5);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-5);
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ── Step Progress Indicator ─────────────────────────────── */
+.step-progress-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  padding: 20px 32px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
+}
+
+.step-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-indicator {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-3);
+  background: var(--color-surface);
+  transition: all 0.3s ease;
+}
+
+.step-indicator.active {
+  border-color: var(--color-brand-600);
+  background: var(--color-brand-600);
+  color: white;
+  box-shadow: 0 0 0 4px var(--color-brand-100);
+}
+
+.step-indicator.done {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: white;
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-3);
+}
+
+.step-label.active {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--color-border-light);
+  margin: 0 16px;
+  transition: background 0.3s ease;
+}
+
+.step-line.done {
+  background: var(--color-success);
+}

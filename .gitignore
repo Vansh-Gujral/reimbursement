@@ -1,0 +1,23 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
